@@ -25,10 +25,10 @@
 (define (f n) (f-iter 0 1 2 n))
 
 (define (f-iter x y z count)
-        (cond ((= count 0) x)
-              ((= count 1) y)
+        (cond ((>= count 3) (f-iter y z (+ z (* 2 y) (* 3 x)) (- count 1)))
               ((= count 2) z)
-          (else (f-iter y z (+ z (* 2 y) (* 3 x)) (- count 1)))
+              ((= count 1) y)
+              ((= count 0) x)
         ))
 
 ;; Expanded:
