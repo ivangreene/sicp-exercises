@@ -15,3 +15,16 @@
 (+ (+ (+ (+ (+ 0 (+ (cc 10 0) (cc (- 10 (first-denomination 1) 1))) (+ (+ (cc 6 0) (cc (- 6 (first-denomination 1)) 1)) (cc (- 6 5) 2))) (+ (+ (+ (cc 1 0) (cc (- 1 (first-denomination 1)) 1)) (cc (- 1 5) 2))) (cc -9 3))) 0) 0)
 
 (+ (+ (+ (+ (+ 0 (+ (cc 10 0) (cc (- 10 (first-denomination 1)) 1)) (+ (+ (cc 6 0) (cc (- 6 (first-denomination 1)) 1)) (cc (- 6 5) 2)
+
+;; (I really do not feel like finishing this expansion. We get the idea)
+
+;; From the Internet mostly,
+;; Space(n) = θ(n) because space is relative to the depth of the tree. Maximum tree depth is n
+;; Time(n) = θ(n^k) where k is the number of denominations (in our case 5)
+;; Time explanation:
+; cc(n, 1) = θ(n)
+; cc(n, 2) = cc(n, 1) + cc(n-5, 2)
+; The step above is θ(n), taken ~ n/5 times
+; This is θ(n^2)
+; Therefore, θ(n^k) for k currency denominations
+;; http://community.schemewiki.org/?sicp-ex-1.14
