@@ -2,6 +2,8 @@
 
 ;; A:
 
+;; With plenty of help from http://www.billthelizard.com/2009/12/sicp-exercise-113-fibonacci-and-golden.html I stepped through this inductive proof as much as I could.
+
 (define phi (/ (+ 1 (sqrt 5)) 2))
 (define psi (/ (- 1 (sqrt 5)) 2))
 
@@ -53,3 +55,21 @@
 (/ (sqrt 5) (sqrt 5))
 1
 
+;; We want to prove that Fib(n) is the closest integer to Phi^n/sqrt(5). We get closer to this by rearranging our last proof to take the difference of Fib(n) and Phi^n/sqrt(5)
+
+; Fib(n) = (Phi^n - Psi^n)/sqrt(5)
+; Fib(n) = Phi^n/sqrt(5) - Psi^n/sqrt(5)
+
+; Fib(n)-Phi^n/sqrt(5) = Psi^n/sqrt(5)
+;; Prove that Psi^n/sqrt(5) <= 1/2
+;; Or Psi^n <= sqrt(5)/2
+
+; Psi = -0.618304...
+; n >= 0
+; Psi < 1
+;; Therefore,
+; Psi^n <= 1
+; sqrt(5)/2 = 1.118...
+; sqrt(5)/2 > 1
+; Psi^n <= sqrt(5)/2
+;; Fib(n) is the closest integer to Phi^n/sqrt(5)!
