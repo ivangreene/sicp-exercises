@@ -5,6 +5,7 @@
 (define (iter-expt base ex)
   (define (iter b n a)
     (cond ((= n 0) a)
+          ((= n 1) b)
           ((even? n) (iter (* b b) (/ n 2) (* a b))) 
           (else (iter b (- n 1) (* a b))) ))
   (iter base ex 1))
