@@ -20,3 +20,7 @@ m))))
 ;; negating any benefit we would have gained by dividing the exponent in half.
 ;; The exponent is halved, but the remaining work is doubled. This is effectively the
 ;; same as using this function without the (even? exp) condition.
+
+;; Another note is that using an interpreter with normal-order evaluation,
+;; these procedures would be equivalent, as the expansion made by the square
+;; function would also duplicate our work.
