@@ -17,6 +17,15 @@
 (define (factorial n)
   (product identity 1 ++ n)) 
 
+
+(define (++2 x) (+ x 2))
+(define (pi accuracy)
+  (define limit (if (odd? accuracy) (+ accuracy 1) accuracy))
+  (*
+    (/ (* 2 (product square 4 ++2 limit) (++2 limit))
+       (product square 3 ++2 (+ limit 1)))
+    4.0))
+
 ;; b. Q: If your product procedure generates a recursive process, write one that generates an iterative process. If it generates an iterative process, write one that generates a recursive process.
 
 (define (iterative-product term a next b)
