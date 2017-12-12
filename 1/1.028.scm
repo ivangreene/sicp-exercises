@@ -5,15 +5,27 @@
 (define (expmod base exp m)
   (cond ((= exp 0) 1)
         ((even? exp)
-         (if (and (not (= base 1)) (not (= base (- m 1))) (= (remainder (square base) m) 1))
+          (if (and (not (= base 1))
+                   (not (= base (- m 1)))
+                   (= (remainder (square base) m) 1))
               0
               (remainder (square (expmod base (/ exp 2) m))
                     m)))
         (else
-         (remainder (* base (expmod base (- exp 1) m))
+          (remainder (* base (expmod base (- exp 1) m))
                     m))))
 
-(define (miller-rabin? n)
+(define (miller-rabin-test n)
+  (define (try-it a)
+    (= (expmod a n n) a))
+  (try-it (+ 1 (random (- n 1)))))
+
+(define (fast-prime? n times)
+  (cond ((= times 0) true)
+        ((miller-rabin-test n) (fast-prime? n (- times 1)))
+        (else false)))
+
+(define (miller-rabin-iter n)
   (define (iter a)
     (cond
       ((= (expmod a (- n 1) n) 0) #f)
