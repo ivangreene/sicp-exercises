@@ -28,7 +28,7 @@
 
 ;; A: Recursive:
 
-(define (cont-frac n d k)
+(define (cont-frac-recursive n d k)
   (define (inner l)
     (if (> l k)
         0
@@ -37,12 +37,12 @@
 
 ;; Iterative:
 
-(define (cont-frac n d k)
+(define (cont-frac-iter n d k)
   (define (iter val l)
-    (if (> l k)
+    (if (> 1 l)
         val
-        (iter (/ (n l) (+ (d l) val)) (+ l 1))))
-  (iter 0 1))
+        (iter (/ (n l) (+ (d l) val)) (- l 1))))
+  (iter 0 k))
 
 ;; In using this formula to approximate 1/phi, I only had to set k to 11 to get
 ;; 4-decimal place accuracy.
