@@ -17,6 +17,7 @@
     (if (= m 1)
         ff
         (repeated-iter (compose f ff) (- m 1))))
+  (trace repeated-iter)
   (repeated-iter f n))
 
 ;; A:
@@ -30,3 +31,11 @@
          (f x)
          (f (+ x dx)))
        3)))
+
+;; To generate the n-fold smoothed function for any given function, we need to
+;; only repeat the smoothing, not duplicate the original function.
+
+(define (n-fold-smooth f n)
+    ((repeated smooth n) f))
+
+;; It should be noted that this will create a procedure with steps O(3^n)!
