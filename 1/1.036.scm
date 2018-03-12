@@ -30,3 +30,15 @@
 ;; value > 1; negative values are not within the domain of the log function and
 ;; values smaller than 1 will return a negative number, violating the former
 ;; principle on the next evaluation.
+
+(define (average x y) (/ (+ x y) 2))
+(define (average-damp f)
+  (lambda (x) (average x (f x))))
+
+;; I would assume this procedure to take twice as many steps (as in calls to f)
+;; with average damping
+
+(define (logbase-damped x) ((average-damp (lambda (y) (/ (log 1000) (log y)))) x))
+(fixed-point logbase-damped 2)
+
+;; Amazingly I hadn't considered the convergence improvement and was thinking these procedures would roll through the same sequence of guesses, but average damping improves the process significantly. To find the convergence of x -> log(1000)/log(x), beginning with guess of 2, without average damping this took 33 steps, with average damping it took only 8!
