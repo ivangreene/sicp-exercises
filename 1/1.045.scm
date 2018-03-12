@@ -43,5 +43,13 @@
 
 (define (cubert x)
   (fixed-point
-    (average-damp (lambda (y)
-      (average y (/ x (* y y y))))) 1))
+    ((repeated average-damp 2) (lambda (y)
+      (/ x (* y y y)))) 1))
+
+(define (n-root n x)
+  (fixed-point ((repeated average-damp (ceiling (log (* n 2))))
+                (lambda (y) (/ x (expt y (- n 1))))) 1))
+
+;; After some experimentation, I found that the ceiling of the natural log of
+;; 2n produced a good number to repeat the damping by so that the function
+;; would converge.
