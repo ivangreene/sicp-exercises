@@ -18,9 +18,33 @@
 
 ;; Substitution:
 
-(add-1 zero)
-(add-1 (lambda (f) (lambda (x) x)))
-(lambda (f) (lambda (x) (f (((lambda (f) (lambda (x) x)) f) x))))
+; (add-1 zero)
+; (add-1 (lambda (f) (lambda (x) x)))
+; (lambda (f) (lambda (x) (f (((lambda (f) (lambda (x) x)) f) x))))
 
 (define one (lambda (f) (lambda (x) (f x))))
 (define two (lambda (f) (lambda (x) (f (f x)))))
+
+(define (plus n m)
+  (lambda (f) (lambda (x) ((n f) ((m f) x)))))
+
+;; My understanding is that these Church numerals represent an integer N as a
+;; function which takes a function as an argument, and returns a function which
+;; takes one argument and the passed function will be called with that argument
+;; N times.
+
+;; Here's a simple demonstration to see how they work, using actual numbers as
+;; the arguments passed, for clarity:
+
+(define (inc x) (+ x 1))
+
+((zero inc) 0)
+; 0
+((one inc) 0)
+; 1
+((two inc) 0)
+; 2
+(((plus one two) inc) 0)
+; 3
+(((plus (plus two one) (plus two two)) inc) 0)
+; 7
