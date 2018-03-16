@@ -19,4 +19,4 @@
   (make-interval (* c (- 1 (/ p 100))) (* c (+ 1 (/ p 100)))))
 
 (define (percent i)
-  (/ (center i) (width i)))
+  (* (/ (width i) (center i)) 100))
