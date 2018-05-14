@@ -69,3 +69,24 @@
          (balanced? (branch-structure right))
          (= (* (branch-weight left) (branch-length left))
             (* (branch-weight right) (branch-length right)))))))
+
+;; d. Suppose we change the representation of mobiles so that the constructors
+;; are
+
+(define (make-mobile left right)
+  (cons left right))
+
+(define (make-branch length structure)
+  (cons length structure))
+
+;; How much do you need to change your programs to convert to the new
+;; representation?
+
+;; A: Thanks to the way we built upon abstractions, all we need to change are
+;; the accessor functions! And only two of them at that:
+
+(define (right-branch m)
+  (cdr m))
+
+(define (branch-structure b)
+  (cdr b))
