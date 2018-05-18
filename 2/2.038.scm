@@ -12,6 +12,8 @@
               (cdr rest))))
   (iter initial sequence))
 
+(define fold-right accumulate)
+
 ;; What are the values of
 
 ; (fold-right / 1 (list 1 2 3))
